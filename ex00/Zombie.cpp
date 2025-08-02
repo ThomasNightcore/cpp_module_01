@@ -3,6 +3,11 @@
 #include <iostream>
 #include "Zombie.hpp"
 
+Zombie::Zombie(void)
+{
+	_name = "";
+}
+
 Zombie::Zombie(std::string name)
 {
 	_name = name;

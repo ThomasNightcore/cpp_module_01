@@ -11,9 +11,7 @@ INCLUDES_DIR		= ./
 OBJS_DIR			= ./objs/
 
 # Source files
-CFILES_ROOT			= Zombie.cpp \
-					  zombieHorde.cpp \
-					  main.cpp
+CFILES_ROOT			= main.cpp
 
 OBJ_FILES 			:= $(CFILES_ROOT:.cpp=.o) \
 
