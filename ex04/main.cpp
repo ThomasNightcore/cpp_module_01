@@ -6,13 +6,15 @@
 /*   By: tluegham <tluegham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 14:05:47 by tluegham          #+#    #+#             */
-/*   Updated: 2025/08/06 22:21:46 by tluegham         ###   ########.fr       */
+/*   Updated: 2025/08/06 23:24:59 by tluegham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string>
 #include <iostream>
 #include <fstream>
+
+std::string replace_buffer(const std::string &buffer, const std::string &str1, const std::string &str2);
 
 static std::string read_file(std::ifstream &file)
 {
@@ -23,32 +25,16 @@ static std::string read_file(std::ifstream &file)
 	{
 		read_file.append(line + '\n');
 	}
+	if (file.eof())
+		file.clear();
 	return (read_file);
 }
 
-static std::string replace_buffer(const std::string &buffer, const std::string &str1, const std::string &str2)
+static void create_replaced_buffer_file(std::string &buffer, const std::string &file_name)
 {
-	std::string	new_buffer;
-	size_t		found_pos = 0;
-	
-	for (size_t i = 0; i < buffer.length();)
-	{
-		found_pos = buffer.find(str1, i);
-		new_buffer += buffer.substr(i, found_pos - i);
-
-		i = found_pos + str1.length();
-		if (found_pos == std::string::npos)
-			break;
-		new_buffer += str2;
-	}
-
-	return (new_buffer);
-}
-
-static void create_replaced_buffer_file(std::string &buffer, char *file_name)
-{
-	(void) file_name;
-	std::cout << buffer << std::endl;
+	std::ofstream outfile((file_name + ".replace").c_str());
+	outfile << buffer;
+	outfile.close();
 }
 
 static bool has_bad_input(int argc, char **argv)
@@ -78,12 +64,17 @@ int main(int argc, char **argv)
 	file.open(argv[1]);
 	if (!file.is_open())
 	{
-		std::cout << "Couldn't open file " << argv[1] << "!" << std::endl;
+		std::cout << "Couldn't open file \'" << argv[1] << "\'!" << std::endl;
 		return (0);
 	}
 	buffer = read_file(file);
 	file.close();
+	if (file.fail())
+	{
+		std::cout << "There was an error reading from file \'" << argv[1] << "\'!" << std::endl;
+		return (1);
+	}
 	buffer = replace_buffer(buffer, to_replace, replace_with);
-	create_replaced_buffer_file(buffer, argv[1]);
+	create_replaced_buffer_file(buffer, std::string(argv[1]));
 	return (0);
 }
