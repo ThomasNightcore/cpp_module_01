@@ -11,15 +11,15 @@ INCLUDES_DIR		= ./
 OBJS_DIR			= ./objs/
 
 # Source files
-CFILES_ROOT			= main.cpp
+CFILES_ROOT			= main.cpp \
+					  Harl.cpp
 
 OBJ_FILES 			:= $(CFILES_ROOT:.cpp=.o) \
-
 
 OBJS				:= $(addprefix $(OBJS_DIR), $(OBJ_FILES))
 
 # Compilation variables
-NAME				= program
+NAME				= harl
 CXX 				= c++
 CXXFLAGS 			= -Wall -Werror -Wextra -std=c++98
 RM 					= rm -rf
