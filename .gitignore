@@ -1,4 +1,8 @@
 *.o
 *.a
+*.replace
 
 program
+tests
+test
+
