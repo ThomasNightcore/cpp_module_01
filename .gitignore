@@ -3,6 +3,7 @@
 *.replace
 
 program
+harl
+harlFilter
 tests
-test
 
