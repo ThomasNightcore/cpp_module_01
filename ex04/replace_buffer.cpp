@@ -6,7 +6,7 @@
 /*   By: tluegham <tluegham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 23:25:03 by tluegham          #+#    #+#             */
-/*   Updated: 2025/08/06 23:25:04 by tluegham         ###   ########.fr       */
+/*   Updated: 2025/08/07 13:20:58 by tluegham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ std::string replace_buffer(const std::string &buffer, const std::string &str1, c
 	std::string	new_buffer;
 	size_t		found_pos = 0;
 	
+	if (str1.empty())
+		return (buffer);
+
 	for (size_t i = 0; i < buffer.length();)
 	{
 		found_pos = buffer.find(str1, i);
